@@ -1,0 +1,22 @@
+create table COURSE (ID int primary key, name varchar(45), duration varchar(45), summary varchar(1024));
+create table STUDENT  (ID int primary key, namefirst varchar(45), namelast varchar(45), DOB date, emailID varchar(128));
+create table STUDENT_PHONE (ID int primary key, studentID int , number varchar(45), isActive bool, foreign key(studentID) reference STUDENT(ID) );
+create table STUDENT_ADDRESS (ID int primary key, studentID int unique key not null, address varchar(128),foreign key(studentID) reference STUDENT(ID));
+create table FACULTY (ID int primary key, namefirst varchar(45), namelast varchar(45), DOB date, emailID varchar(128));
+create table FACULTY_PHONE (ID int primary key, facultyID int, number varchar(10), foreign key(facultyid) references FACULTY(id));
+create table FACULTY_ADDRESS (ID int primary key, facultyID int  unique key not null , foreign key(facultyID) references FACULTY(ID));
+create table MODULES (ID int primary key, name varchar(128), duration int);
+create table COURSE_MODULES (ID int primary key, courseID int, moduleID int, foreign key(courseID) references COURSE(ID),foreign key(moduleID) references MODULES(ID));
+create table STUDENT_QUALIFICATIONS (ID int primary key, studentID int, name varchar(128), college varchar(128), university varchar(128), marks varchar(45), year int,foreign key(studentID) references STUDENT(ID));
+create table FACULTY_QUALIFICATIONS (ID int primary key, facultyID int, name varchar(128), college varchar(128), university varchar(128), marks varchar(45), year int,foreign key(facultyID) references FACULTY(ID));
+create table COURSE_BATCHES (ID int primary key,  name varchar(45), courseID int, starton date, endson date, capacity int, foreign key (courseID) references COURSE (ID));
+create table BATCH_STUDENTS (ID int primary key, batchID int, studentID int,  foreign key (batchID) references COURSE_BATCHES(ID),foreign key (studentID) references STUDENT(ID));
+create table STUDENTS_CARDS (ID int primary key, studentID int, name varchar(45), isActive bool, foreign key (studentID) references STUDENT(ID));
+create table STUDENTS_ORDER (ID int primary key, studentID int, date int, amount int, foreign key (studentID) references STUDENT(ID));
+
+
+
+
+
+
+
